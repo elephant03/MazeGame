@@ -1,6 +1,26 @@
 {
-    "dimensions": {
-        "width": 100,
-        "height": 100
+    "pygame": {
+        "dimensions": {
+            "width": 100,
+            "height": 100
+        }
+    },
+    "tkinter": {
+        "background": "#7eccf7",
+        "foreground": "black",
+        "btn_background": "#2db4ff",
+        "btn_activebackground": "#2da9ff",
+        "quitbtn_background": "#ef2804",
+        "quitbtn_activebackground": "#f52804",
+        "positivebtn_background": "#1ece18",
+        "positivebtn_activebackground": "#159b11",
+        "btn_foreground": "black",
+        "btn_activeforeground": "black",
+        "font": "Arial",
+        "font_size": 15,
+        "title_font_size": 25
+    },
+    "game": {
+        "difficulty": "Normal"
     }
 }
