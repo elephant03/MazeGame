@@ -1,0 +1,7 @@
+*.pyc
+*~
+__pycache__
+.vscode
+myDatabase.db
+plan.txt
+WorkSpace.code-workspace
