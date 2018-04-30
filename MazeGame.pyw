@@ -47,11 +47,38 @@ with open("config.json") as config:
     # Game varables
     game_data = data["game"]
 
+    FPS = game_data["fps"]
     dificulty = game_data["difficulty"]
 
 
 # Calculates the screen size based off the dimensions given in the config
 SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
+
+
+class Game():
+    '''The game class- to rerun the game eaily'''
+
+    def __init__(self):
+        '''Insilises the game'''
+        return
+
+    def process_events(self):
+        '''Processes all of the user events like mouse movments and keys'''
+        done = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                done = True
+
+        return done
+
+    def run_logic(self):
+        '''Runs the main game logic and updates all sprite possitions'''
+        return
+
+    def display_frame(self, display):
+        '''clears the screen and draws all the objects onto it'''
+        display.fill(WHITE)
+        return
 
 
 def StartMenu():
@@ -80,7 +107,7 @@ def StartMenu():
     dificulty_lbl.grid(row=2, column=0, sticky="nsew", padx=2, pady=2)
 
     StrVar = tkinter.StringVar(start_fr)
-    StrVar.set(dificulty)
+    StrVar.set("Normal")
 
     difficulty_dd = tkinter.OptionMenu(
         start_fr, StrVar, "Easy", "Normal", "Hard", "Mega")
@@ -98,7 +125,7 @@ def StartMenu():
     quit_btn.grid(row=3, column=0, padx=2, pady=2, sticky="nsew")
 
     play_btn = tkinter.Button(start_fr, bg=POSITIVE_BTN_BACKGROUND, activebackground=POSITIVE_BTN_ACTIVE, fg=BTN_FOREGROUND,
-                              activeforeground=BTN_FOREGROUND, font=FONT, text="Play!", command=lambda: [root.destroy(), play()])
+                              activeforeground=BTN_FOREGROUND, font=FONT, text="Play!", command=lambda: [root.destroy(), play(StrVar)])
     play_btn.grid(row=3, column=1, sticky="nsew", pady=2, padx=2)
 
     Align_Grid(root)
@@ -124,8 +151,56 @@ def Align_Grid(Frame):
         Frame.rowconfigure(i, weight=1)
 
 
-def play():
+def play(strVar):
     '''Opens the game window and controls the game loop'''
+    # Sets the game mode so the sprites can read it
+    with open("config.json", "r") as jsonFile:
+        data = json.load(jsonFile)
+
+    data["game"]["difficulty"] = strVar.get()
+
+    with open("config.json", "w") as jsonFile:
+        json.dump(data, jsonFile, indent=4)
+
+    # Creats the pygame window
+    pygame.init()
+
+    # Sets up the clock to control the game speed
+    clock = pygame.time.Clock()
+
+    # Sets the screen size adds a title and give it an icon
+    screen = pygame.display.set_mode(SCREEN_SIZE, 0)
+    pygame.display.set_caption("Maze Game")
+    icon = pygame.image.load("Libary/Images/GameMazeIcon.png").convert()
+    pygame.display.set_icon(icon)
+
+    game = Game()
+
+    # Main game loop
+    while True:
+
+        # Process events (keystrokes, mouse clicks, etc)
+        done = game.process_events()
+        # This will return the win or loss if the game is over
+        if done:
+            # This will exit the main game loop
+            pygame.quit()
+            break
+
+        # Update object positions, check for collisions and other game logic
+        game.run_logic()
+
+        # Draw the current frame- all sprites etc. and clear the old screen
+        game.display_frame(screen)
+
+        # Waists before running the next game loop
+        clock.tick(FPS)
+
+    end_game(done)
+
+
+def end_game(win):
+    '''When the game is over this will display your score and the high scores and ask you if you want to play again'''
     return
 
 

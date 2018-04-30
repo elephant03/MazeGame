@@ -1,8 +1,8 @@
 {
     "pygame": {
         "dimensions": {
-            "width": 100,
-            "height": 100
+            "width": 1000,
+            "height": 700
         }
     },
     "tkinter": {
@@ -21,6 +21,46 @@
         "title_font_size": 25
     },
     "game": {
-        "difficulty": "Normal"
+        "difficulty": "Normal",
+        "fps": 60,
+        "level": 0,
+        "modes": {
+            "Easy": {
+                "player_speed": 4,
+                "enemy_speed": 1,
+                "shot_cooldown": 20,
+                "lives": 5,
+                "socre_multiplyer": 1.2,
+                "player_laser_speed": 5,
+                "enemy_laser_speed": 4
+            },
+            "Normal": {
+                "player_speed": 3,
+                "enemy_speed": 1,
+                "shot_cooldown": 30,
+                "lives": 3,
+                "socre_multiplyer": 1.4,
+                "player_laser_speed": 3,
+                "enemy_laser_speed": 3
+            },
+            "Hard": {
+                "player_speed": 2,
+                "enemy_speed": 2,
+                "shot_cooldown": 35,
+                "lives": 3,
+                "socre_multiplyer": 1.6,
+                "player_laser_speed": 2,
+                "enemy_laser_speed": 4
+            },
+            "Mega": {
+                "player_speed": 1,
+                "enemy_speed": 3,
+                "shot_cooldown": 60,
+                "lives": 1,
+                "socre_multiplyer": 2.5,
+                "player_laser_speed": 1,
+                "enemy_laser_speed": 8
+            }
+        }
     }
 }
